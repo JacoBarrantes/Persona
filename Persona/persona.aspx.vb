@@ -14,7 +14,6 @@
         End If
 
 
-
         persona.Nombre = txtNombre.Text
         persona.Apellidos = TxtApellido.Text
         persona.FechaNacimiento = TxtFechaNacimiento.Text

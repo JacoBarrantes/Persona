@@ -32,6 +32,15 @@ Partial Public Class persona
     Protected WithEvents txtNombre As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''rfvNombre control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rfvNombre As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''LabelApellido control.
     '''</summary>
     '''<remarks>
@@ -48,6 +57,15 @@ Partial Public Class persona
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TxtApellido As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''rfvApellido control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rfvApellido As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''LabelFechaNacimiento control.
@@ -131,6 +149,15 @@ Partial Public Class persona
     Protected WithEvents TxtNumeroDocumento As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''rfvNumeroDocumento control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rfvNumeroDocumento As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''btnGuardar control.
     '''</summary>
     '''<remarks>
@@ -147,4 +174,22 @@ Partial Public Class persona
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Lblmensaje As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''gvPersonas control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gvPersonas As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''SqlDataSource1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
 End Class
