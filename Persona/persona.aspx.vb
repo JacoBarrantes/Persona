@@ -1,5 +1,9 @@
-﻿Public Class persona
+﻿Imports Persona.Utils
+
+Public Class persona
     Inherits System.Web.UI.Page
+
+    Private dbHelper As New DbHelper()
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
@@ -18,10 +22,24 @@
         persona.Apellidos = TxtApellido.Text
         persona.FechaNacimiento = TxtFechaNacimiento.Text
         persona.Correo = TxtCorreo.Text
-        persona.TipoDocumento = ddlTipoDocumento.SelectedItem.Text
-        persona.NumeroDocuemento = TxtNumeroDocumento.Text
+        persona.TipoDocumento = ddlTipoDocumento.SelectedItem.Value
+        persona.NumeroDocumento = TxtNumeroDocumento.Text
 
-        Lblmensaje.Text = persona.Resumen()
+        'blmensaje.Text = persona.Resumen()
+
+        Dim ID As Integer = dbHelper.CrearPersona(persona)
+
+        If ID > 0 Then
+            Lblmensaje.Text = $"Persona creada con ID: {ID}"
+            Lblmensaje.CssClass = "Alert alert-success"
+            gvPersonas.DataBind()
+            SwalUtils.ShowSwalError(Me, "Persona creada", $"la persona {persona.Nombre} {persona.Apellidos} ha sido creada correctamente.", "success")
+        Else
+            Lblmensaje.Text = "Error al crear la persona"
+            Lblmensaje.CssClass = "Alert alert-danger"
+        End If
+
+
 
     End Sub
 End Class

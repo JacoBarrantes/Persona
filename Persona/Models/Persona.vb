@@ -11,7 +11,7 @@
             Me.Nombre = nombre
             Me.Apellidos = apellidos
             Me.TipoDocumento = tipoDocumento
-            Me.NumeroDocuemento = numeroDocuemento
+            Me.NumeroDocumento = numeroDocuemento
             Me.FechaNacimiento = fechaNacimiento
             Me.Correo = correo
         End Sub
@@ -55,7 +55,7 @@
             End Set
         End Property
 
-        Public Property NumeroDocuemento As String
+        Public Property NumeroDocumento As String
             Get
                 Return _numeroDocuemento
             End Get
