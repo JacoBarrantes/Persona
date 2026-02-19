@@ -3,7 +3,7 @@
 Public Class persona
     Inherits System.Web.UI.Page
 
-    Private dbHelper As New DbHelper()
+    Private dbPersona As New dbPersona()
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
@@ -16,8 +16,6 @@ Public Class persona
             Lblmensaje.Text = "La fecha de nacimiento no es valida"
             Return
         End If
-
-
         persona.Nombre = txtNombre.Text
         persona.Apellidos = TxtApellido.Text
         persona.FechaNacimiento = TxtFechaNacimiento.Text
@@ -27,19 +25,50 @@ Public Class persona
 
         'blmensaje.Text = persona.Resumen()
 
-        Dim ID As Integer = dbHelper.CrearPersona(persona)
+        Dim result As Integer = dbPersona.CrearPersona(persona)
 
-        If ID > 0 Then
-            Lblmensaje.Text = $"Persona creada con ID: {ID}"
-            Lblmensaje.CssClass = "Alert alert-success"
+        If result Then
             gvPersonas.DataBind()
-            SwalUtils.ShowSwalError(Me, "Persona creada", $"la persona {persona.Nombre} {persona.Apellidos} ha sido creada correctamente.", "success")
+            SwalUtils.ShowSwal(Me, "Persona creada", $"la persona {persona.Nombre} {persona.Apellidos} ha sido creada correctamente.", "success")
         Else
-            Lblmensaje.Text = "Error al crear la persona"
-            Lblmensaje.CssClass = "Alert alert-danger"
+            SwalUtils.ShowSwalError(Me, "Persona no creada", $"Por favor revise los datos.", "Error")
         End If
+    End Sub
+
+    Protected Sub gvPersonas_RowDeleting(sender As Object, e As GridViewDeleteEventArgs)
+        Dim ID As Integer = Convert.ToInt32(gvPersonas.DataKeys(e.RowIndex).Value)
+        Dim result As Integer = dbPersona.EliminarPersona(ID)
+
+        If result Then
+            SwalUtils.ShowSwal(Me, "Persona eliminada", "La persona ha sido eliminada correctamente")
+
+        Else
+            SwalUtils.ShowSwal(Me, "Error al eliminar", "La persona no ha sido eliminada, por favor revise los datos", "error")
+
+        End If
+        gvPersonas.DataBind()
+        e.Cancel = True
+
+    End Sub
+
+    Protected Sub gvPersonas_RowCancelingEdit(sender As Object, e As GridViewCancelEditEventArgs)
+
+    End Sub
+
+    Protected Sub gvPersonas_RowUpdating(sender As Object, e As GridViewUpdateEventArgs)
+        Dim persona As New Models.Persona()
+        persona.Nombre = CType(gvPersonas.Rows(e.RowIndex).FindControl("txtNombreEdit"), TextBox).Text
+        SwalUtils.ShowSwal(Me, persona.Nombre, "", "success")
+        gvPersonas.DataBind()
+        gvPersonas.EditIndex = -1
 
 
+    End Sub
+
+    Protected Sub gvPersonas_RowEditing(sender As Object, e As GridViewEditEventArgs)
+        gvPersonas.EditIndex = e.NewEditIndex
+        txtNombre.Text = CType(gvPersonas.Rows(e.NewEditIndex).FindControl("txtNombreEdit"), TextBox).Text
+        gvPersonas.DataBind()
 
     End Sub
 End Class

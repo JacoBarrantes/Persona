@@ -57,7 +57,7 @@
     <div class="form-group">
         <asp:Label ID="lblTipoDoc" runat="server" Text="Tipo Documento:" CssClass="control-label"></asp:Label>
         <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="form-control">
-            <asp:ListItem Text="Seleccione un tipo de documento" Value="0"></asp:ListItem>
+            <asp:ListItem Text="Seleccione un tipo de documento" Value=""></asp:ListItem>
             <asp:ListItem Text="Cédula Física" Value="1"></asp:ListItem>
             <asp:ListItem Text="Pasaporte" Value="2"></asp:ListItem>
             <asp:ListItem Text="Cédula Jurídica" Value="3"></asp:ListItem>
@@ -85,7 +85,13 @@
            <asp:Label ID="Lblmensaje" runat="server" Text="Mensaje:" CssClass=""></asp:Label>
 
 
-        <asp:GridView ID="gvPersonas" runat="server" AutoGenerateColumns="False" DataKeyNames="ID_Persona" DataSourceID="SqlDataSource1"  >
+        <asp:GridView ID="gvPersonas" runat="server" AutoGenerateColumns="False" DataKeyNames="ID_Persona" DataSourceID="SqlDataSource1" 
+            OnRowDeleting="gvPersonas_RowDeleting"
+            OnRowEditing ="gvPersonas_RowEditing"
+            OnRowUpdating ="gvPersonas_RowUpdating"
+            OnRowCancelingEdit ="gvPersonas_RowCancelingEdit"
+            >
+            
             <Columns>
                 <asp:BoundField DataField="ID_Persona" HeaderText="ID_Persona" InsertVisible="False" ReadOnly="True" SortExpression="ID_Persona" />
                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
@@ -94,9 +100,14 @@
                 <asp:BoundField DataField="Correo" HeaderText="Correo" SortExpression="Correo" />
                 <asp:BoundField DataField="Numero_Documento" HeaderText="Numero_Documento" SortExpression="Numero_Documento" />
                 <asp:BoundField DataField="Tipo_Documento" HeaderText="Tipo_Documento" SortExpression="Tipo_Documento" />
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
             </Columns>
             </asp:GridView>
+
+
+
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:II-46-PrograIIIConnectionString %>" ProviderName="<%$ ConnectionStrings:II-46-PrograIIIConnectionString.ProviderName %>" SelectCommand="SELECT * FROM [Personas] ORDER BY [Apellido]"></asp:SqlDataSource>
 
+    </div>
     </div>
 </asp:Content>
